@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main app component Renders without errors 1`] = `
+<div
+  className="App"
+>
+  <div
+    className="search-main"
+  >
+    <Header />
+    <SearchBar
+      handleSearch={[Function]}
+    />
+  </div>
+  <div
+    className="res-display"
+  >
+    <DisplayResults
+      className=""
+      searchResults={Object {}}
+    />
+  </div>
+</div>
+`;

@@ -1,11 +1,13 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-flow: column wrap;
 }
 
 .search-main {
   position: relative;
-  width: 100%;
-  min-height: 60vh;
+  width: 100vw;
+  min-height: 90vh;
   top: -25px;
   background-image: linear-gradient(0deg, transparent, black 75%);
   z-index: 1;

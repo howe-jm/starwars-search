@@ -10,6 +10,7 @@ export default class App extends React.Component {
     apiError: false,
     apiErrorMsg: '',
     loading: false,
+    className: '',
   };
 
   handleSearch = (formValue, topicValue) => {
@@ -17,7 +18,7 @@ export default class App extends React.Component {
   };
 
   apiSearch = (searchTerm, searchTopic) => {
-    this.setState({ loading: true });
+    this.setState({ loading: true, className: 'hidden' });
     Promise.all([fetch(`https://swapi-thinkful.herokuapp.com/api/${searchTopic}/?search=${searchTerm}`)])
       .then(([searchRes]) => {
         if (!searchRes.ok) return searchRes.json().then((e) => Promise.reject(e));
@@ -25,8 +26,7 @@ export default class App extends React.Component {
       })
       .then(([searchResults]) => {
         this.setState({ searchResults });
-        console.log(this.state.searchResults);
-        this.setState({ loading: false });
+        this.setState({ loading: false, className: 'crawl' });
       })
       .catch((error) => {
         this.setState({ loading: false, apiError: true, apiErrorMsg: `${error}` });
@@ -36,11 +36,15 @@ export default class App extends React.Component {
   render() {
     return (
       <div className='App'>
-        <Header />
-        <SearchBar handleSearch={this.handleSearch} />
-        {this.state.loading && <h2>Searching...</h2>}
-        {this.state.apiError && <h2>{this.state.apiErrorMsg}</h2>}
-        <DisplayResults searchResults={this.state.searchResults} />
+        <div className='search-main'>
+          <Header />
+          <SearchBar handleSearch={this.handleSearch} />
+          {this.state.loading && <h2>Searching...</h2>}
+          {this.state.apiError && <h2>{this.state.apiErrorMsg}</h2>}
+        </div>
+        <div className='res-display'>
+          <DisplayResults className={this.state.className} searchResults={this.state.searchResults} />
+        </div>
       </div>
     );
   }

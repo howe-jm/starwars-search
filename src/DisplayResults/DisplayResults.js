@@ -1,4 +1,5 @@
 import React from 'react';
+import './DisplayResults.css';
 
 export default class DisplayResults extends React.Component {
   render() {
@@ -11,12 +12,17 @@ export default class DisplayResults extends React.Component {
     } else {
       const { results } = this.props.searchResults;
       const resultString = results.map((obj, i) => {
-        return <div key={i}>{results[i].name ? `Name: ${results[i].name}` : results[i].title ? `Title: ${results[i].title}` : null}</div>;
+        return <div key={i + `swlistobj`}>{results[i].name ? `${results[i].name}` : results[i].title ? `${results[i].title}` : null}</div>;
       });
       return (
-        <div>
-          <h2>{resultString}</h2>
-        </div>
+        <section className='star-wars'>
+          <div className={this.props.className}>
+            <div className='results-body'>
+              <h2>Search Results</h2>
+              {resultString}
+            </div>
+          </div>
+        </section>
       );
     }
   }
